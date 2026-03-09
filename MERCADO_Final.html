@@ -1,0 +1,734 @@
+<!--░░░░░░███████ ]▄▄▄▄▄▄▄▄
+ ▂▄▅█████████▅▄▃▂        
+[███████████████████]. 
+◥⊙▲⊙▲⊙▲⊙▲⊙▲⊙▲⊙◤..
+⠄⠄⠄⠄⠄⠄⣀⣤⣴⣶⣾⠟⠉⠻⣷⣶⣦⣤⣀⠄⠄⠄⠄⠄⠄
+⠄⠄⠄⢀⣴⣾⣿⣿⣿⠟⠁⠄⠄⠄⣨⣿⣿⣿⣿⣷⣦⡀⠄⠄⠄
+⠄⠄⣴⣿⣿⣿⣿⠟⠁⠄⠄⠄⣠⣾⣿⣿⣿⠿⣿⣿⣿⣿⣦⠄⠄
+⠄⣼⣿⣿⣿⣏⠁⠄⠄⠄⠠⣾⣿⣿⡿⠏⠁⠄⠈⠹⢿⣿⣿⣧⠄
+⢸⣿⡿⣿⣿⣿⣷⣄⠄⠄⠄⠈⠻⠋⠄⠄⠄⠄⠄⠄⠄⠙⢿⣿⡇
+⡿⠋⠄⠈⠻⣿⣿⣿⣷⣄⠄⠄⠄⠄⠄⢀⣴⣿⣦⡀⠄⠄⠄⠙⢿
+⣷⣄⠄⠄⠄⠈⠻⣿⠟⠁⠄⠄⠄⠄⠄⠙⢿⣿⣿⣿⣦⡀⠄⣠⣾
+⢸⣿⣷⣄⠄⠄⠄⠄⠄⠄⠄⣠⣦⡀⠄⠄⠄⠙⢿⣿⣿⣿⣾⣿⡏
+⠄⢻⣿⣿⣷⣆⡀⠄⠄⣠⣾⣿⣿⡿⠆⠄⠄⠄⢀⣹⣿⣿⣿⡟⠄
+⠄⠄⠻⣿⣿⣿⣿⣦⣾⣿⣿⡿⠋⠄⠄⠄⢀⣴⣿⣿⣿⣿⠟⠄⠄
+⠄⠄⠄⠈⠻⢿⣿⣿⣿⣿⡋⠄⠄⠄⢀⣴⣿⣿⣿⣿⠟⠁⠄⠄⠄
+⠄⠄⠄⠄⠄⠄⠉⠛⠿⠿⢿⣦⣀⣴⣿⠿⠿⠛⠉⠄⠄⠄⠄⠄⠄-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>🧪📜 Calculadoras Alquímicas</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+  :root {
+    --gold: rgb(238, 190, 85);
+    --gold-dim: rgba(238, 190, 85, 0.6);
+    --blood: rgba(61, 2, 2, 0.88);
+    --blood-light: rgba(80, 5, 5, 0.7);
+    --border: rgba(255, 230, 0, 0.77);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Crimson Text', serif;
+    background: #000;
+    background-image: url('Fondo-pagina-web.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--gold);
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ===== MENÚ DE NAVEGACIÓN ===== */
+  #nav-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(20, 0, 0, 0.97);
+    border-bottom: 2px solid var(--border);
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  #nav-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-shadow: 0 0 12px rgba(238,190,85,0.5);
+  }
+
+  #nav-toggle-icon {
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
+    color: var(--gold);
+  }
+
+  #nav-toggle-icon.open {
+    transform: rotate(180deg);
+  }
+
+  #nav-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  #nav-buttons.visible {
+    max-height: 200px;
+    opacity: 1;
+  }
+
+  .nav-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    padding: 7px 14px;
+    background: rgba(61, 2, 2, 0.7);
+    color: var(--gold-dim);
+    border: 1px solid var(--gold-dim);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .nav-btn:hover {
+    background: rgba(100, 5, 5, 0.9);
+    color: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 0 10px rgba(238,190,85,0.3);
+  }
+
+  .nav-btn.active {
+    background: rgba(150, 10, 10, 0.9);
+    color: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 0 14px rgba(238,190,85,0.45);
+    font-weight: 700;
+  }
+
+  /* ===== SECCIONES ===== */
+  .calc-section {
+    margin: 30px auto;
+    padding: 22px 20px;
+    width: 95%;
+    background: var(--blood);
+    border-radius: 15px;
+    border: 1px solid rgba(238,190,85,0.15);
+    transition: all 0.35s ease;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .calc-section.hidden {
+    display: none;
+  }
+
+  h2 {
+    font-family: 'Cinzel', serif;
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 1.25rem;
+    margin-top: 0;
+    text-shadow: 0 0 10px rgba(238,190,85,0.4);
+  }
+
+  table {
+    margin: auto;
+    border-collapse: collapse;
+    width: 100%;
+    background: rgba(61, 2, 2, 0.548);
+    font-size: 0.9rem;
+  }
+
+  th, td {
+    border: 1px solid var(--border);
+    padding: 7px;
+    color: var(--gold);
+    text-align: center;
+  }
+
+  th {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    background: rgba(40, 1, 1, 0.8);
+  }
+
+  select, input {
+    padding: 5px;
+    background: #4a3333bd;
+    color: var(--gold);
+    border: 1px solid #3f3131b2;
+    border-radius: 4px;
+    font-family: 'Crimson Text', serif;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  button {
+    padding: 7px 14px;
+    margin: 6px 4px;
+    background: rgba(240, 173, 50, 0.08);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    cursor: pointer;
+    border-radius: 6px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+
+  button:hover {
+    background: rgba(240, 173, 50, 0.2);
+    box-shadow: 0 0 10px rgba(238,190,85,0.3);
+  }
+
+  button.eliminar {
+    padding: 4px 9px;
+    font-size: 0.75rem;
+    border-color: rgba(255,80,80,0.7);
+    color: rgba(255,130,130,0.9);
+    background: transparent;
+    margin: 0;
+  }
+
+  button.eliminar:hover {
+    background: rgba(255,50,50,0.2);
+  }
+
+  .totales {
+    margin-top: 12px;
+    font-size: 1rem;
+    color: var(--gold);
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 1px;
+  }
+
+  .section-controls {
+    text-align: center;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== MENÚ NAVEGACIÓN ===== -->
+<div id="nav-container">
+  <div id="nav-header" onclick="toggleNav()">
+    <span id="nav-title">⚗️ GRIMORIO DE CALCULADORAS</span>
+    <span id="nav-toggle-icon">▼</span>
+  </div>
+  <div id="nav-buttons">
+    <button class="nav-btn active" onclick="toggleSection('pociones', this)">🧪 Pociones</button>
+    <button class="nav-btn active" onclick="toggleSection('pergaminos', this)">📜 Pergaminos</button>
+    <button class="nav-btn active" onclick="toggleSection('armas', this)">⚒️ Armas</button>
+    <button class="nav-btn active" onclick="toggleSection('armaduras', this)">🛡️ Armaduras</button>
+    <button class="nav-btn active" onclick="toggleSection('venenos', this)">☠️ Venenos</button>
+    <button class="nav-btn active" onclick="toggleSection('comidas', this)">🍜 Comidas</button>
+    <button class="nav-btn" style="border-color:rgba(100,200,100,0.5); color:rgba(180,255,180,0.8);" onclick="showAll()">✨ Todas</button>
+    <button class="nav-btn" style="border-color:rgba(200,100,100,0.5); color:rgba(255,180,180,0.8);" onclick="hideAll()">🌑 Ninguna</button>
+  </div>
+</div>
+
+<!-- =================== POCIONES =================== -->
+<section class="calc-section" id="sec-pociones">
+  <h2>🧪 Calculadora de Pociones</h2>
+  <table id="tablaPociones">
+    <tr><th>Tipo</th><th>Cant.</th><th>Costo U.</th><th>Días</th><th>Costo</th><th>Ganancia</th><th>Precio</th><th>Tiempo</th><th>❌</th></tr>
+  </table>
+  <div class="section-controls">
+    <button onclick="addPocion()">➕ Añadir Poción</button>
+    <label>Margen:</label>
+    <select id="gananciaPociones" style="width:auto;">
+      <option value="0.1">10%</option><option value="0.2">20%</option><option value="0.3">30%</option>
+      <option value="0.4">40%</option><option value="0.5" selected>50%</option><option value="0.6">60%</option>
+      <option value="0.7">70%</option><option value="0.8">80%</option><option value="0.9">90%</option>
+    </select>
+    <button onclick="calcPociones()">🧮 Calcular</button>
+  </div>
+  <div class="totales" id="totalPociones"></div>
+</section>
+
+<!-- =================== PERGAMINOS =================== -->
+<section class="calc-section" id="sec-pergaminos">
+  <h2>📜 Calculadora de Pergaminos</h2>
+  <table id="tablaPergaminos">
+    <tr><th>Tipo</th><th>Rango</th><th>Cant.</th><th>Costo U.</th><th>Días</th><th>Costo</th><th>Ganancia</th><th>Precio</th><th>Tiempo</th><th>❌</th></tr>
+  </table>
+  <div class="section-controls">
+    <button onclick="addPergamino()">➕ Añadir Pergamino</button>
+    <label>Margen:</label>
+    <select id="gananciaPergaminos" style="width:auto;">
+      <option value="0.1">10%</option><option value="0.2">20%</option><option value="0.3">30%</option>
+      <option value="0.4">40%</option><option value="0.5" selected>50%</option><option value="0.6">60%</option>
+      <option value="0.7">70%</option><option value="0.8">80%</option><option value="0.9">90%</option>
+    </select>
+    <button onclick="calcPergaminos()">🧮 Calcular</button>
+  </div>
+  <div class="totales" id="totalPergaminos"></div>
+</section>
+
+<!-- =================== ARMAS =================== -->
+<section class="calc-section" id="sec-armas">
+  <h2>⚒️ Calculadora de Armas / Instrumentos</h2>
+  <table id="tablaArmas">
+    <tr><th>Nombre</th><th>Tipo de Armero</th><th>Precio Tienda</th><th>Costo Creación</th><th>Precio Cliente</th><th>Tiempo</th><th>Estado</th><th>❌</th></tr>
+  </table>
+  <div class="section-controls">
+    <button onclick="addArma()">➕ Añadir Arma</button>
+    <button onclick="calcArmas()">🧮 Calcular</button>
+    <label>Margen:</label>
+    <select id="ajusteArmas" style="width:auto;">
+      <option value="0.1">10%</option><option value="0.2">20%</option><option value="0.3">30%</option>
+      <option value="0.4">40%</option><option value="0.5" selected>50%</option><option value="0.6">60%</option>
+      <option value="0.7">70%</option><option value="0.8">80%</option><option value="0.9">90%</option>
+    </select>
+  </div>
+  <div class="totales" id="totalArmas"></div>
+</section>
+
+<!-- =================== ARMADURAS =================== -->
+<section class="calc-section" id="sec-armaduras">
+  <h2>🛡️ Calculadora de Armaduras</h2>
+  <table id="tablaArmaduras">
+    <tr><th>Nombre</th><th>Tipo</th><th>Precio Tienda</th><th>Costo Creación</th><th>Precio Cliente</th><th>Tiempo</th><th>Estado</th><th>❌</th></tr>
+  </table>
+  <div class="section-controls">
+    <button onclick="addArmadura()">➕ Añadir Armadura</button>
+    <button onclick="calcArmaduras()">🧮 Calcular</button>
+    <label>Margen:</label>
+    <select id="ajusteArmaduras" style="width:auto;">
+      <option value="0.1">10%</option><option value="0.2">20%</option><option value="0.3">30%</option>
+      <option value="0.4">40%</option><option value="0.5" selected>50%</option><option value="0.6">60%</option>
+      <option value="0.7">70%</option><option value="0.8">80%</option><option value="0.9">90%</option>
+    </select>
+  </div>
+  <div class="totales" id="totalArmaduras"></div>
+</section>
+
+<!-- =================== VENENOS =================== -->
+<section class="calc-section" id="sec-venenos">
+  <h2>☠️ Calculadora de Venenos</h2>
+  <table id="tablaVenenos">
+    <tr><th>Tipo</th><th>Cant.</th><th>Costo U.</th><th>Días</th><th>Costo</th><th>Ganancia</th><th>Precio</th><th>Tiempo</th><th>❌</th></tr>
+  </table>
+  <div class="section-controls">
+    <button onclick="addVeneno()">➕ Añadir Veneno</button>
+    <label>Margen:</label>
+    <select id="gananciaVenenos" style="width:auto;">
+      <option value="0.1">10%</option><option value="0.2">20%</option><option value="0.3">30%</option>
+      <option value="0.4">40%</option><option value="0.5" selected>50%</option><option value="0.6">60%</option>
+      <option value="0.7">70%</option><option value="0.8">80%</option><option value="0.9">90%</option>
+    </select>
+    <button onclick="calcVenenos()">🧮 Calcular</button>
+  </div>
+  <div class="totales" id="totalVenenos"></div>
+</section>
+
+<!-- =================== COMIDAS =================== -->
+<section class="calc-section" id="sec-comidas">
+  <h2>🍜🍷 Calculadora de Comidas</h2>
+  <table id="tablaComidas">
+    <tr><th>Tipo</th><th>Cant.</th><th>Costo U.</th><th>Días</th><th>Costo</th><th>Ganancia</th><th>Precio</th><th>Tiempo</th><th>❌</th></tr>
+  </table>
+  <div class="section-controls">
+    <button onclick="addComida()">➕ Añadir Comida</button>
+    <label>Margen:</label>
+    <select id="gananciaComidas" style="width:auto;">
+      <option value="0.1">10%</option><option value="0.2">20%</option><option value="0.3">30%</option>
+      <option value="0.4">40%</option><option value="0.5" selected>50%</option><option value="0.6">60%</option>
+      <option value="0.7">70%</option><option value="0.8">80%</option><option value="0.9">90%</option>
+    </select>
+    <button onclick="calcComidas()">🧮 Calcular</button>
+  </div>
+  <div class="totales" id="totalComidas"></div>
+</section>
+
+<script>
+// ===== MENÚ NAV =====
+let navOpen = false;
+
+function toggleNav() {
+  navOpen = !navOpen;
+  document.getElementById("nav-buttons").classList.toggle("visible", navOpen);
+  document.getElementById("nav-toggle-icon").classList.toggle("open", navOpen);
+}
+
+// Mapa sección → botón
+const sectionMap = {
+  pociones:   0,
+  pergaminos: 1,
+  armas:      2,
+  armaduras:  3,
+  venenos:    4,
+  comidas:    5
+};
+
+function toggleSection(id, btn) {
+  const sec = document.getElementById("sec-" + id);
+  const isHidden = sec.classList.contains("hidden");
+  sec.classList.toggle("hidden", !isHidden);
+  btn.classList.toggle("active", isHidden);
+  if (isHidden) sec.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function showAll() {
+  const btns = document.querySelectorAll(".nav-btn");
+  Object.keys(sectionMap).forEach((id, i) => {
+    document.getElementById("sec-" + id).classList.remove("hidden");
+    btns[i].classList.add("active");
+  });
+}
+
+function hideAll() {
+  const btns = document.querySelectorAll(".nav-btn");
+  Object.keys(sectionMap).forEach((id, i) => {
+    document.getElementById("sec-" + id).classList.add("hidden");
+    btns[i].classList.remove("active");
+  });
+}
+
+// Abrir menú al cargar
+window.addEventListener("load", () => toggleNav());
+
+// ================= CATÁLOGOS =================
+const pociones = {
+  "Poción de Vida - Simple":            {c:250,  d:1},
+  "Poción de Comprensión":              {c:1750, d:5},
+  "Poción de Escalado":                 {c:250,  d:1},
+  "Poción de Respirar Bajo el Agua":    {c:1250, d:7},
+  "Ácido":                              {c:125,  d:1},
+  "Poción de Vida - Mayor":             {c:1000, d:7},
+  "Antitoxina":                         {c:250,  d:1},
+  "Fuego de Alquimista":                {c:250,  d:1},
+  "Poción de Aliento de Fuego":         {c:1750, d:14},
+  "Poción de Vida - Superior":          {c:5000, d:21}
+};
+
+const pergaminos = {
+  "Truco":   {r:"E", c:150,  d:1},
+  "Nivel 1": {r:"D", c:250,  d:1},
+  "Nivel 2": {r:"C", c:500,  d:3},
+  "Nivel 3": {r:"B", c:750,  d:7},
+  "Nivel 4": {r:"A", c:1000, d:14}
+};
+
+const tiposArmero = {
+  "Armero Novato":         {max:100,      dias:1},
+  "Instrumentos Musicales":{max:Infinity, dias:7},
+  "Armero Avanzado":       {max:300,      dias:3},
+  "Armero Experto":        {max:1000,     dias:7},
+  "Armero Especializado":  {max:Infinity, dias:14}
+};
+
+const tiposArmadura = {
+  "Simple":      {max:100,      dias:1},
+  "Costosa":     {max:500,      dias:3},
+  "Compleja":    {max:2000,     dias:7},
+  "Coraza":      {max:Infinity, dias:28},
+  "Semiplacas":  {max:Infinity, dias:49},
+  "Placas":      {max:Infinity, dias:105}
+};
+
+const venenos = {
+  "Veneno Simple":        {c:200,  d:1},
+  "Aceite de Taggit":     {c:1000, d:5},
+  "Sangre de Asesino":    {c:1500, d:5},
+  "Veneno de Serpiente":  {c:750,  d:2},
+  "Esencia de Éter":      {c:3000, d:5},
+  "Veneno de Draco":      {c:3000, d:7},
+  "Veneno de Gusano Púrpura": {c:5000, d:14}
+};
+
+const comidas = {
+  "Sopa caliente":                      {c:300,  d:1},
+  "Bebida Fría":                        {c:300,  d:1},
+  "Sopa de Lengua de Basilisco":        {c:400,  d:1},
+  "Huevos de Roc Escalfados":           {c:800,  d:2},
+  "Guiso con Plumas Mágicas":           {c:800,  d:2},
+  "Tarta Celestial":                    {c:2000, d:5},
+  "Muffin mágico de Sátiro":            {c:500,  d:3},
+  "Jugo de Atlántida":                  {c:500,  d:3},
+  "Curry de Salamandra":                {c:1000, d:2},
+  "Sushi del Kraken":                   {c:1000, d:2},
+  "Estofado del Gigante del Invierno":  {c:1000, d:2},
+  "Sopa de Grifo Dorado":               {c:1500, d:3},
+  "Muffin de la Memoria":               {c:1800, d:3},
+  "Champiñones feéricos":               {c:1800, d:3},
+  "Chuletas de desplazamiento":         {c:2500, d:4},
+  "Pastel de Carne del Guerrero Heroico":{c:3000,d:5},
+  "Muffin de la Instinto":              {c:1500, d:2},
+  "Muffin de la Personalidad":          {c:1500, d:2},
+  "Pan de la Montaña Sagrada":          {c:2000, d:3},
+  "Té de Abracadabrus":                 {c:3500, d:5},
+  "Espaguetis de Beholder":             {c:2500, d:3},
+  "Salmón celestial":                   {c:2500, d:3},
+  "Brochetas con huesos de Liche":      {c:3000, d:4},
+  "Té de Abracadabrus Especial":        {c:4000, d:5}
+};
+
+// ================= HELPERS =================
+function crearBotonEliminar(fila) {
+  const b = document.createElement("button");
+  b.textContent = "X";
+  b.className = "eliminar";
+  b.onclick = () => fila.remove();
+  return b;
+}
+
+function makeSelect(catalog) {
+  const s = document.createElement("select");
+  for (let k in catalog) s.innerHTML += `<option>${k}</option>`;
+  return s;
+}
+
+// =================== POCIONES ===================
+function addPocion() {
+  const t = document.getElementById("tablaPociones");
+  const f = t.insertRow();
+  f.insertCell(0).appendChild(makeSelect(pociones));
+  f.insertCell(1).innerHTML = "<input type='number' value='1' min='1'>";
+  for (let i = 2; i <= 7; i++) f.insertCell(i);
+  f.insertCell(8).appendChild(crearBotonEliminar(f));
+}
+
+function calcPociones() {
+  const t = document.getElementById("tablaPociones");
+  const m = parseFloat(document.getElementById("gananciaPociones").value);
+  let tc=0, tg=0, tp=0, tt=0;
+  for (let i = 1; i < t.rows.length; i++) {
+    const r = t.rows[i];
+    const k = r.cells[0].children[0].value;
+    const q = parseInt(r.cells[1].children[0].value);
+    if (!q) continue;
+    const p = pociones[k];
+    const c = p.c*q, g = c*m, pr = c+g;
+    r.cells[2].innerText = p.c;
+    r.cells[3].innerText = p.d;
+    r.cells[4].innerText = c;
+    r.cells[5].innerText = Math.round(g);
+    r.cells[6].innerText = Math.round(pr);
+    r.cells[7].innerText = p.d;
+    tc+=c; tg+=g; tp+=pr; tt+=p.d;
+  }
+  document.getElementById("totalPociones").innerHTML =
+    `💰 ${tc} mp &nbsp;|&nbsp; 💸 +${Math.round(tg)} mp &nbsp;|&nbsp; 🏷️ ${Math.round(tp)} mp &nbsp;|&nbsp; ⏳ ${tt} días`;
+}
+
+// =================== PERGAMINOS ===================
+function addPergamino() {
+  const t = document.getElementById("tablaPergaminos");
+  const f = t.insertRow();
+  f.insertCell(0).appendChild(makeSelect(pergaminos));
+  f.insertCell(1);
+  f.insertCell(2).innerHTML = "<input type='number' value='1' min='1'>";
+  for (let i = 3; i <= 8; i++) f.insertCell(i);
+  f.insertCell(9).appendChild(crearBotonEliminar(f));
+}
+
+function calcPergaminos() {
+  const t = document.getElementById("tablaPergaminos");
+  const m = parseFloat(document.getElementById("gananciaPergaminos").value);
+  let tc=0, tg=0, tp=0, tt=0;
+  for (let i = 1; i < t.rows.length; i++) {
+    const r = t.rows[i];
+    const k = r.cells[0].children[0].value;
+    const q = parseInt(r.cells[2].children[0].value);
+    if (!q) continue;
+    const p = pergaminos[k];
+    const c = p.c*q, g = c*m, pr = c+g;
+    r.cells[1].innerText = p.r;
+    r.cells[3].innerText = p.c;
+    r.cells[4].innerText = p.d;
+    r.cells[5].innerText = c;
+    r.cells[6].innerText = Math.round(g);
+    r.cells[7].innerText = Math.round(pr);
+    r.cells[8].innerText = p.d;
+    tc+=c; tg+=g; tp+=pr; tt+=p.d;
+  }
+  document.getElementById("totalPergaminos").innerHTML =
+    `💰 ${tc} mp &nbsp;|&nbsp; 💸 +${Math.round(tg)} mp &nbsp;|&nbsp; 🏷️ ${Math.round(tp)} mp &nbsp;|&nbsp; ⏳ ${tt} días`;
+}
+
+// =================== ARMAS ===================
+function addArma() {
+  const t = document.getElementById("tablaArmas");
+  const f = t.insertRow();
+  f.insertCell(0).innerHTML = "<input placeholder='Nombre del arma'>";
+  f.insertCell(1).appendChild(makeSelect(tiposArmero));
+  f.insertCell(2).innerHTML = "<input type='number' min='1' placeholder='mp'>";
+  for (let i = 3; i <= 6; i++) f.insertCell(i).innerText = "-";
+  f.insertCell(7).appendChild(crearBotonEliminar(f));
+}
+
+function calcArmas() {
+  const t = document.getElementById("tablaArmas");
+  const porcentaje = parseFloat(document.getElementById("ajusteArmas").value);
+  let totalCosto=0, totalGanancia=0;
+  for (let i = 1; i < t.rows.length; i++) {
+    const r = t.rows[i];
+    const tipo = r.cells[1].children[0].value;
+    const precio = parseFloat(r.cells[2].children[0].value);
+    if (!precio || precio <= 0) continue;
+    const cfg = tiposArmero[tipo];
+    const costo = precio / 2;
+    const precioCliente = Math.round(precio + (precio * porcentaje));
+    const ganancia = precioCliente - costo;
+    r.cells[3].innerText = costo + " mp";
+    r.cells[4].innerText = precioCliente + " mp";
+    r.cells[5].innerText = cfg.dias + " días";
+    if (precio > cfg.max) {
+      r.cells[6].innerHTML = "<span style='color:#ff7070'>❌ Excede límite</span>";
+    } else {
+      r.cells[6].innerHTML = "<span style='color:#70ff70'>✅ Válido</span>";
+      totalCosto += costo;
+      totalGanancia += ganancia;
+    }
+  }
+  document.getElementById("totalArmas").innerHTML =
+    `💰 Costo creación: ${totalCosto} mp &nbsp;|&nbsp; 💸 Ganancia total: ${totalGanancia} mp`;
+}
+
+// =================== ARMADURAS ===================
+function addArmadura() {
+  const t = document.getElementById("tablaArmaduras");
+  const f = t.insertRow();
+  f.insertCell(0).innerHTML = "<input placeholder='Nombre'>";
+  f.insertCell(1).appendChild(makeSelect(tiposArmadura));
+  f.insertCell(2).innerHTML = "<input type='number'>";
+  for (let i = 3; i <= 6; i++) f.insertCell(i).innerText = "-";
+  f.insertCell(7).appendChild(crearBotonEliminar(f));
+}
+
+function calcArmaduras() {
+  const t = document.getElementById("tablaArmaduras");
+  const m = parseFloat(document.getElementById("ajusteArmaduras").value);
+  let totalCosto=0, totalGanancia=0;
+  for (let i = 1; i < t.rows.length; i++) {
+    const r = t.rows[i];
+    const tipo = r.cells[1].children[0].value;
+    const precio = parseFloat(r.cells[2].children[0].value);
+    if (!precio) continue;
+    const cfg = tiposArmadura[tipo];
+    const costo = precio / 2;
+    const precioCliente = Math.round(precio + (precio * m));
+    const ganancia = precioCliente - costo;
+    r.cells[3].innerText = costo + " mp";
+    r.cells[4].innerText = precioCliente + " mp";
+    r.cells[5].innerText = cfg.dias + " días";
+    if (precio > cfg.max) {
+      r.cells[6].innerHTML = "<span style='color:#ff7070'>❌ Excede límite</span>";
+    } else {
+      r.cells[6].innerHTML = "<span style='color:#70ff70'>✅ Válido</span>";
+      totalCosto += costo;
+      totalGanancia += ganancia;
+    }
+  }
+  document.getElementById("totalArmaduras").innerHTML =
+    `💰 Costo creación: ${totalCosto} mp &nbsp;|&nbsp; 💸 Ganancia: ${totalGanancia} mp`;
+}
+
+// =================== VENENOS ===================
+function addVeneno() {
+  const t = document.getElementById("tablaVenenos");
+  const f = t.insertRow();
+  f.insertCell(0).appendChild(makeSelect(venenos));
+  f.insertCell(1).innerHTML = "<input type='number' value='1' min='1'>";
+  for (let i = 2; i <= 7; i++) f.insertCell(i);
+  f.insertCell(8).appendChild(crearBotonEliminar(f));
+}
+
+function calcVenenos() {
+  const t = document.getElementById("tablaVenenos");
+  const m = parseFloat(document.getElementById("gananciaVenenos").value);
+  let tc=0, tg=0, tp=0, tt=0;
+  for (let i = 1; i < t.rows.length; i++) {
+    const r = t.rows[i];
+    const k = r.cells[0].children[0].value;
+    const q = parseInt(r.cells[1].children[0].value);
+    if (!q) continue;
+    const p = venenos[k];
+    const c = p.c*q, g = c*m, pr = c+g;
+    r.cells[2].innerText = p.c;
+    r.cells[3].innerText = p.d;
+    r.cells[4].innerText = c;
+    r.cells[5].innerText = Math.round(g);
+    r.cells[6].innerText = Math.round(pr);
+    r.cells[7].innerText = p.d * q;
+    tc+=c; tg+=g; tp+=pr; tt+=p.d*q;
+  }
+  document.getElementById("totalVenenos").innerHTML =
+    `💰 ${tc} mp &nbsp;|&nbsp; 💸 +${Math.round(tg)} mp &nbsp;|&nbsp; 🏷️ ${Math.round(tp)} mp &nbsp;|&nbsp; ⏳ ${tt} días`;
+}
+
+// =================== COMIDAS ===================
+function addComida() {
+  const t = document.getElementById("tablaComidas");
+  const f = t.insertRow();
+  f.insertCell(0).appendChild(makeSelect(comidas));
+  f.insertCell(1).innerHTML = "<input type='number' value='1'>";
+  for (let i = 2; i <= 7; i++) f.insertCell(i);
+  f.insertCell(8).appendChild(crearBotonEliminar(f));
+}
+
+function calcComidas() {
+  const t = document.getElementById("tablaComidas");
+  const m = parseFloat(document.getElementById("gananciaComidas").value);
+  let tc=0, tg=0, tp=0, tt=0;
+  for (let i = 1; i < t.rows.length; i++) {
+    const r = t.rows[i];
+    const k = r.cells[0].children[0].value;
+    const q = parseInt(r.cells[1].children[0].value);
+    if (!q) continue;
+    const p = comidas[k];
+    const c = p.c*q, g = c*m, pr = c+g;
+    r.cells[2].innerText = p.c;
+    r.cells[3].innerText = p.d;
+    r.cells[4].innerText = c;
+    r.cells[5].innerText = Math.round(g);
+    r.cells[6].innerText = Math.round(pr);
+    r.cells[7].innerText = p.d * q;
+    tc+=c; tg+=g; tp+=pr; tt+=p.d*q;
+  }
+  document.getElementById("totalComidas").innerHTML =
+    `💰 ${tc} mp &nbsp;|&nbsp; 💸 +${Math.round(tg)} mp &nbsp;|&nbsp; 🏷️ ${Math.round(tp)} mp &nbsp;|&nbsp; ⏳ ${tt} días`;
+}
+
+// ================= INICIO =================
+addPocion();
+addPergamino();
+addArma();
+addArmadura();
+addVeneno();
+addComida();
+</script>
+</body>
+</html>
